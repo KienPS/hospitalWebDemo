@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <main>
+        <h1>Hospital Web demo</h1>
+        <h3><a href="{{ path('patient_list') }}">Patients</a></h3>
+        <h3><a href="{{ path('admission_list') }}">Admissions</a></h3>
+    </main>
+{% endblock %}

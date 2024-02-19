@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <main>
+        <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <ol>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('admission_list') }}">Admission</a></li>
+                <li aria-current="page">Details</li>
+            </ol>
+        </nav>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <td>{{ admission.Id }}</td>
+            </tr>
+            <tr>
+                <th>Patient ID</th>
+                <td><a href="{{ path('patient_show', {'id': admission.patientId}) }}">{{ admission.patientId }}</a></td>
+            </tr>
+            <tr>
+                <th>Date Visited</th>
+                <td>{{ admission.dateVisit|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>Reason</th>
+                <td>{{ admission.reason }}</td>
+            </tr>
+            <tr>
+                <th>Room</th>
+                <td>{{ admission.room }}</td>
+            </tr>
+            <tr>
+                <th>Bed</th>
+                <td>{{ admission.bed }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ admission.status }}</td>
+            </tr>
+        </table>
+    </main>
+{% endblock %}

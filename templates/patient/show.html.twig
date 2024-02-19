@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <main>
+        <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <ol>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('patient_list') }}">Patients</a></li>
+                <li aria-current="page">Details</li>
+            </ol>
+        </nav>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <td>{{ patient.Id }}</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>{{ patient.FirstName }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ patient.LastName }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ patient.DateOfBirth|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ patient.Address }}</td>
+            </tr>
+            <tr>
+                <th>Phone number</th>
+                <td>{{ patient.PhoneNumber }}</td>
+            </tr>
+        </table>
+        <h3>Admission history</h3>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Date visit</th>
+                <th>Status</th>
+            </tr>
+            {% for admission in admissions %}
+                <tr>
+                    <td><a href="{{ path('admission_show', {'id': admission.Id}) }}">{{ admission.id }}</a></td>
+                    <td>{{ admission.dateVisit|date('d-m-Y') }}</td>
+                    <td>{{ admission.status }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </main>
+{% endblock %}

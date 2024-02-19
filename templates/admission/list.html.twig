@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <main>
+        <nav class="breadcrumbs" aria-label="Breadcrumbs">
+            <ol>
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li aria-current="page">Admissions</li>
+            </ol>
+        </nav>
+        <h1>Admissions</h1>
+        <form action="{{ path('admission_search') }}" method="post">
+            <label>
+                <span>Search By ID</span>
+                <input type="text" name="search" placeholder="Search">
+            </label>
+            <button type="submit">Search</button>
+        </form>
+        {% if notfound %}
+            <div class="box bad">
+                <strong class="block titlebar">Error</strong>
+                No admissions found
+            </div>
+        {% endif %}
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Patient ID</th>
+                <th>Date visit</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for admission in admissions %}
+                <tr>
+                    <td>{{ admission.id }}</td>
+                    <td><a href="{{ path('patient_show', {'id': admission.patientId}) }}">{{ admission.patientId }}</a></td>
+                    <td>{{ admission.dateVisit|date('d-m-Y') }}</td>
+                    <td>{{ admission.status }}</td>
+                    <td>
+                        <a href="{{ path('admission_show', {'id': admission.patientId}) }}">show</a>
+                        <a href="{{ path('admission_edit', {'id': admission.patientId}) }}">edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button hx-get="{{ path('admission_create') }}" hx-target="body" hx-replace-url="true" hx-push-url="true">Add new admission</button>
+        <noscript>
+            <a href="{{ path('admission_create') }}">Add new addmission</a>
+        </noscript>
+    </main>
+{% endblock %}
